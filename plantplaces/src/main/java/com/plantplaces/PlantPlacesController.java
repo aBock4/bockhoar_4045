@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plantplaces.dto.SpecimenDTO;
@@ -22,10 +23,11 @@ public class PlantPlacesController {
 	 * @return
 	 */
 	@RequestMapping(value="/start", method=RequestMethod.GET)
-	public String read(Model model) {
+	@ResponseBody
+	public SpecimenDTO read(Model model) {
 		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
 		model.addAttribute("specimenDTO",specimenDTO);
-		return "start";
+		return specimenDTO;
 	}
 	
 	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
